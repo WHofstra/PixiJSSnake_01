@@ -1,4 +1,4 @@
-class Controls
+export class Controls
 {
     
 }
