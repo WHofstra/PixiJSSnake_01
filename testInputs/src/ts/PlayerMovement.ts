@@ -1,6 +1,7 @@
-export class PlayerMovement
+export class PlayerMovement implements Observer
 {
-    public Move() {
-        console.log("Moved player.");
+    Update(): void
+    {
+        console.log("Player moved.");
     }
 }

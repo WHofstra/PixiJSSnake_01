@@ -1,4 +1,5 @@
 //import * as PIXI from 'pixi.js';
+import { Controls } from './ts/Controls';
 import { PlayerMovement } from './ts/PlayerMovement';
 
 //Creates a Renderer Using WebGL
@@ -7,8 +8,13 @@ import { PlayerMovement } from './ts/PlayerMovement';
 //Creates a Canvas
 //document.body.appendChild(app.view);
 
+//Define Controls
+const controls = new Controls();
+
 //Define Player
 const player = new PlayerMovement();
 
 //Perform Player Actions
-player.Move();
+controls.Register(player);
+controls.KeyInput("A");
+controls.KeyInput("S");

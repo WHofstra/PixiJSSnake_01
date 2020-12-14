@@ -1,4 +1,4 @@
 interface Observer
 {
-
+    Update(): void;
 }

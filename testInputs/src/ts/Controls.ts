@@ -1,8 +1,12 @@
 export class Controls implements Subject
 {
-    private observerList: Array<Observer> = []
+    private observerList: Array<Observer> = [];
+    private input: string;
 
-    constructor() {}
+    constructor()
+    {
+        this.input = "";
+    }
 
     Register(anObserver: Observer): void
     {
@@ -18,7 +22,14 @@ export class Controls implements Subject
 
     Notify(): void
     {
-        
+        this.observerList.forEach(element => {
+            element.Update();
+        });
     }
-    
+
+    KeyInput(anInput: string): void
+    {
+        this.input = anInput;
+        console.log(this.input + " is pressed.");
+    }
 }
