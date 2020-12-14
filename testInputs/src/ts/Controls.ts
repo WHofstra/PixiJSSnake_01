@@ -31,5 +31,6 @@ export class Controls implements Subject
     {
         this.input = anInput;
         console.log(this.input + " is pressed.");
+        this.Notify();
     }
 }

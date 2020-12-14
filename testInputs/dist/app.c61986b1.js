@@ -162,6 +162,7 @@ var Controls = /*#__PURE__*/function () {
     value: function KeyInput(anInput) {
       this.input = anInput;
       console.log(this.input + " is pressed.");
+      this.Notify();
     }
   }]);
 
@@ -169,6 +170,62 @@ var Controls = /*#__PURE__*/function () {
 }();
 
 exports.Controls = Controls;
+},{}],"ts/Vector.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Vector = /*#__PURE__*/function () {
+  function Vector(xValue, yValue) {
+    var zValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+    _classCallCheck(this, Vector);
+
+    this.y = 0;
+    this.z = 0;
+    this.x = xValue;
+    this.y = yValue;
+    this.z = zValue;
+  }
+
+  _createClass(Vector, [{
+    key: "X",
+    get: function get() {
+      return this.x;
+    },
+    set: function set(value) {
+      this.x = value;
+    }
+  }, {
+    key: "Y",
+    get: function get() {
+      return this.y;
+    },
+    set: function set(value) {
+      this.y = value;
+    }
+  }, {
+    key: "Z",
+    get: function get() {
+      return this.z;
+    },
+    set: function set(value) {
+      this.z = value;
+    }
+  }]);
+
+  return Vector;
+}();
+
+exports.Vector = Vector;
 },{}],"ts/PlayerMovement.ts":[function(require,module,exports) {
 "use strict";
 
@@ -182,15 +239,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var Vector_1 = require("./Vector");
+
 var PlayerMovement = /*#__PURE__*/function () {
   function PlayerMovement() {
     _classCallCheck(this, PlayerMovement);
+
+    this.position = new Vector_1.Vector(4, 4);
   }
 
   _createClass(PlayerMovement, [{
     key: "Update",
     value: function Update() {
-      console.log("Player moved.");
+      console.log("Player moved to (" + this.position.X + ", " + this.position.Y + ", " + this.position.Z + ").");
     }
   }]);
 
@@ -198,7 +259,7 @@ var PlayerMovement = /*#__PURE__*/function () {
 }();
 
 exports.PlayerMovement = PlayerMovement;
-},{}],"app.ts":[function(require,module,exports) {
+},{"./Vector":"ts/Vector.ts"}],"app.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -242,7 +303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54398" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52087" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
