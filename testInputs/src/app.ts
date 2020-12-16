@@ -1,12 +1,12 @@
-//import * as PIXI from 'pixi.js';
+import * as PIXI from 'pixi.js';
 import { Controls } from './ts/Controls';
 import { PlayerMovement } from './ts/PlayerMovement';
 
 //Creates a Renderer Using WebGL
-//const app = new PIXI.Application({ width: 512, height: 478 });
+const app = new PIXI.Application({ width: 512, height: 478, backgroundColor: 0xFFFFFF });
 
 //Creates a Canvas
-//document.body.appendChild(app.view);
+document.body.appendChild(app.view);
 
 //Define Controls
 const controls = new Controls();
