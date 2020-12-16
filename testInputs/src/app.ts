@@ -1,20 +1,15 @@
-import * as PIXI from 'pixi.js';
-import { Controls } from './ts/Controls';
-import { PlayerMovement } from './ts/PlayerMovement';
+//import * as PIXI from 'pixi.js';
+import { Game } from "./ts/Game"
 
 //Creates a Renderer Using WebGL
-const app = new PIXI.Application({ width: 512, height: 478, backgroundColor: 0xFFFFFF });
+//const app = new PIXI.Application({ width: 512, height: 478, backgroundColor: 0x000000 });
 
 //Creates a Canvas
-document.body.appendChild(app.view);
+//document.body.appendChild(app.view);
 
-//Define Controls
-const controls = new Controls();
+//Define Game
+//This Class Serves as a Façade
+const game = new Game();
 
-//Define Player
-const player = new PlayerMovement();
-
-//Perform Player Actions
-controls.Register(player);
-controls.KeyInput("A");
-controls.KeyInput("S");
+//Input
+game.KeyInput("S");
