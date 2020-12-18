@@ -1,5 +1,5 @@
 import { GameObject, Vector } from '../ObjectBaseClasses/GameObject';
-import { Controls }           from '../Controls';
+import { Controls } from '../ObserverCheck/Controls';
 export { Vector };
 
 export class PlayerMovement extends GameObject implements Observer

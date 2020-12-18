@@ -362,7 +362,7 @@ var StateMachine = /*#__PURE__*/function () {
 }();
 
 exports.StateMachine = StateMachine;
-},{"./MenuState":"ts/GameStates/MenuState.ts","./InGameState":"ts/GameStates/InGameState.ts","./GameOverState":"ts/GameStates/GameOverState.ts","./HighscoreState":"ts/GameStates/HighscoreState.ts"}],"ts/Controls.ts":[function(require,module,exports) {
+},{"./MenuState":"ts/GameStates/MenuState.ts","./InGameState":"ts/GameStates/InGameState.ts","./GameOverState":"ts/GameStates/GameOverState.ts","./HighscoreState":"ts/GameStates/HighscoreState.ts"}],"ts/ObserverCheck/Controls.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -550,7 +550,7 @@ var PlayerMovement = /*#__PURE__*/function (_GameObject_1$GameObj) {
 }(GameObject_1.GameObject);
 
 exports.PlayerMovement = PlayerMovement;
-},{"../ObjectBaseClasses/GameObject":"ts/ObjectBaseClasses/GameObject.ts"}],"ts/Game.ts":[function(require,module,exports) {
+},{"../ObjectBaseClasses/GameObject":"ts/ObjectBaseClasses/GameObject.ts"}],"ts/Scene/Game.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -563,11 +563,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var StateMachine_1 = require("./GameStates/StateMachine");
+var StateMachine_1 = require("../GameStates/StateMachine");
 
-var Controls_1 = require("./Controls");
+var Controls_1 = require("../ObserverCheck/Controls");
 
-var PlayerMovement_1 = require("./Player/PlayerMovement");
+var PlayerMovement_1 = require("../Player/PlayerMovement");
 
 var Game = /*#__PURE__*/function () {
   function Game() {
@@ -578,9 +578,6 @@ var Game = /*#__PURE__*/function () {
     this.player = new PlayerMovement_1.PlayerMovement(new PlayerMovement_1.Vector(40, 80), this.controls);
     this.player;
     this.stateMachine.CurrentState.LoadGame();
-    this.stateMachine.CurrentState.Die();
-    this.stateMachine.CurrentState.Die();
-    this.stateMachine.CurrentState.LoadMenu();
   }
 
   _createClass(Game, [{
@@ -594,18 +591,18 @@ var Game = /*#__PURE__*/function () {
 }();
 
 exports.Game = Game;
-},{"./GameStates/StateMachine":"ts/GameStates/StateMachine.ts","./Controls":"ts/Controls.ts","./Player/PlayerMovement":"ts/Player/PlayerMovement.ts"}],"app.ts":[function(require,module,exports) {
+},{"../GameStates/StateMachine":"ts/GameStates/StateMachine.ts","../ObserverCheck/Controls":"ts/ObserverCheck/Controls.ts","../Player/PlayerMovement":"ts/Player/PlayerMovement.ts"}],"app.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var Game_1 = require("./ts/Game");
+var Game_1 = require("./ts/Scene/Game");
 
 var game = new Game_1.Game();
 game.KeyInput("S");
-},{"./ts/Game":"ts/Game.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./ts/Scene/Game":"ts/Scene/Game.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -633,7 +630,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57805" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51047" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

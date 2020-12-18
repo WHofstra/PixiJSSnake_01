@@ -1,9 +1,10 @@
-import { StateMachine } from './GameStates/StateMachine';
-import { Controls } from './Controls';
-import { PlayerMovement, Vector } from './Player/PlayerMovement';
+import { StateMachine } from '../GameStates/StateMachine';
+import { Controls } from '../ObserverCheck/Controls';
+import { PlayerMovement, Vector } from '../Player/PlayerMovement';
 
 export class Game
 {
+    //This Class Serves as a Façade
     private stateMachine: StateMachine;
     private controls: Controls;
     private player: PlayerMovement;
@@ -20,9 +21,6 @@ export class Game
 
         //Perform State Changes
         this.stateMachine.CurrentState.LoadGame();
-        this.stateMachine.CurrentState.Die();
-        this.stateMachine.CurrentState.Die();
-        this.stateMachine.CurrentState.LoadMenu();
     }
 
     KeyInput(anInput: string): void
