@@ -2,11 +2,22 @@ import { StateMachine } from "./StateMachine";
 
 export class InGameState implements GameState
 {
+    private static inGame: InGameState;
     private machine: StateMachine;
 
     constructor(aMachine: StateMachine)
     {
         this.machine = aMachine;
+    }
+
+    public static GetInstance(aMachine: StateMachine): InGameState
+    {
+        //Create New Instance if There is None
+        if (!this.inGame) {
+            this.inGame = new InGameState(aMachine);
+        }
+
+        return this.inGame;
     }
 
     LoadMenu(): void

@@ -1,11 +1,23 @@
 export class Controls implements Subject
 {
+    private static controls: Controls;
+
     private observerList: Array<Observer> = [];
     private input: string;
 
-    constructor()
+    private constructor()
     {
         this.input = "";
+    }
+
+    public static GetInstance(): Controls
+    {
+        //Create New Instance if There is None
+        if (!this.controls) {
+            this.controls = new Controls();
+        }
+
+        return this.controls;
     }
 
     Register(anObserver: Observer): void

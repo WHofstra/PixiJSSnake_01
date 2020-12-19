@@ -8,7 +8,7 @@ import { Game } from "./ts/Scene/Game"
 //document.body.appendChild(app.view);
 
 //Define Game
-const game = new Game();
+const game = Game.GetInstance();
 
 //Input
 game.KeyInput("S");

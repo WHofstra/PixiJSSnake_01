@@ -4,16 +4,18 @@ import { PlayerMovement, Vector } from '../Player/PlayerMovement';
 
 export class Game
 {
-    //This Class Serves as a Façade
+    //This Whole Class Serves as a Façade
+    private static game: Game;
+
     private stateMachine: StateMachine;
     private controls: Controls;
     private player: PlayerMovement;
 
-    constructor()
+    private constructor()
     {
         //Define Controls and State
-        this.stateMachine = new StateMachine();
-        this.controls = new Controls();
+        this.stateMachine = StateMachine.GetInstance();
+        this.controls     = Controls.GetInstance();
 
         //Define Controls Observers
         this.player = new PlayerMovement(new Vector(40, 80), this.controls);
@@ -21,6 +23,16 @@ export class Game
 
         //Perform State Changes
         this.stateMachine.CurrentState.LoadGame();
+    }
+
+    public static GetInstance(): Game
+    {
+        //Create New Instance if There is None
+        if (!this.game) {
+            this.game = new Game();
+        }
+
+        return this.game;
     }
 
     KeyInput(anInput: string): void

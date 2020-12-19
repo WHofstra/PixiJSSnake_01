@@ -2,10 +2,21 @@ import { StateMachine } from "./StateMachine";
 
 export class HighscoreState implements GameState
 {
+    private static highscore: HighscoreState;
     private machine: StateMachine;
 
-    constructor(aMachine: StateMachine) {
+    private constructor(aMachine: StateMachine) {
         this.machine = aMachine;
+    }
+
+    public static GetInstance(aMachine: StateMachine): HighscoreState
+    {
+        //Create New Instance if There is None
+        if (!this.highscore) {
+            this.highscore = new HighscoreState(aMachine);
+        }
+
+        return this.highscore;
     }
 
     LoadMenu(): void
