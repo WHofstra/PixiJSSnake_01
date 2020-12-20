@@ -1,7 +1,9 @@
 import { StateMachine } from '../GameStates/StateMachine';
 import { Controls } from '../ObserverCheck/Controls';
-import { Player } from '../Player/Player';
+import { ObjectPool, Player } from '../Pool/ObjectPool';
 import { PlayerMovement, Vector } from '../Player/PlayerMovement';
+
+const POOL_SIZE: number = 20;
 
 export class Game
 {
@@ -25,6 +27,9 @@ export class Game
         //Define Player-object
         this.player = new Player(this.playerMovement);
         console.log(this.player.Movement);
+
+        //Define Player Segments
+        ObjectPool.Add(this.player, POOL_SIZE);
 
         //Perform State Changes
         this.stateMachine.CurrentState.LoadGame();

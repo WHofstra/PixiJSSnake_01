@@ -9,4 +9,8 @@ export class GameObject
     {
         this.position = aPosition;
     }
+
+    public get Position() {
+        return this.position;
+    }
 }

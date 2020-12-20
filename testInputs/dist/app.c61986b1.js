@@ -469,7 +469,148 @@ var Controls = /*#__PURE__*/function () {
 }();
 
 exports.Controls = Controls;
-},{}],"ts/Player/Player.ts":[function(require,module,exports) {
+},{}],"ts/VariableLists/Vector.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Vector = /*#__PURE__*/function () {
+  function Vector(xValue, yValue) {
+    var zValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+    _classCallCheck(this, Vector);
+
+    this.x = xValue;
+    this.y = yValue;
+    this.z = zValue;
+  }
+
+  _createClass(Vector, [{
+    key: "Set",
+    value: function Set(X, Y) {
+      var Z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      this.x = X;
+      this.y = Y;
+      this.z = Z;
+    }
+  }, {
+    key: "X",
+    get: function get() {
+      return this.x;
+    },
+    set: function set(value) {
+      this.x = value;
+    }
+  }, {
+    key: "Y",
+    get: function get() {
+      return this.y;
+    },
+    set: function set(value) {
+      this.y = value;
+    }
+  }, {
+    key: "Z",
+    get: function get() {
+      return this.z;
+    },
+    set: function set(value) {
+      this.z = value;
+    }
+  }]);
+
+  return Vector;
+}();
+
+exports.Vector = Vector;
+},{}],"ts/ObjectBaseClasses/GameObject.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Vector_1 = require("../VariableLists/Vector");
+
+exports.Vector = Vector_1.Vector;
+
+var GameObject = /*#__PURE__*/function () {
+  function GameObject(aPosition) {
+    _classCallCheck(this, GameObject);
+
+    this.position = aPosition;
+  }
+
+  _createClass(GameObject, [{
+    key: "Position",
+    get: function get() {
+      return this.position;
+    }
+  }]);
+
+  return GameObject;
+}();
+
+exports.GameObject = GameObject;
+},{"../VariableLists/Vector":"ts/VariableLists/Vector.ts"}],"ts/ObjectBaseClasses/CollisionObject.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var GameObject_1 = require("./GameObject");
+
+exports.Vector = GameObject_1.Vector;
+
+var CollisionObject = /*#__PURE__*/function (_GameObject_1$GameObj) {
+  _inherits(CollisionObject, _GameObject_1$GameObj);
+
+  var _super = _createSuper(CollisionObject);
+
+  function CollisionObject() {
+    _classCallCheck(this, CollisionObject);
+
+    return _super.apply(this, arguments);
+  }
+
+  return CollisionObject;
+}(GameObject_1.GameObject);
+
+exports.CollisionObject = CollisionObject;
+},{"./GameObject":"ts/ObjectBaseClasses/GameObject.ts"}],"ts/Player/Player.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -520,7 +661,75 @@ var Player = /*#__PURE__*/function () {
 }();
 
 exports.Player = Player;
-},{}],"ts/VariableLists/Vector.ts":[function(require,module,exports) {
+},{}],"ts/Player/PlayerSegment.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var CollisionObject_1 = require("../ObjectBaseClasses/CollisionObject");
+
+exports.Vector = CollisionObject_1.Vector;
+
+var Player_1 = require("./Player");
+
+exports.Player = Player_1.Player;
+
+var PlayerSegment = /*#__PURE__*/function (_CollisionObject_1$Co) {
+  _inherits(PlayerSegment, _CollisionObject_1$Co);
+
+  var _super = _createSuper(PlayerSegment);
+
+  function PlayerSegment(aPosition, parent) {
+    var _this;
+
+    _classCallCheck(this, PlayerSegment);
+
+    _this = _super.call(this, aPosition);
+    parent.Register(_assertThisInitialized(_this));
+    _this.velocity = parent.Movement.Velocity;
+    return _this;
+  }
+
+  _createClass(PlayerSegment, [{
+    key: "Flush",
+    value: function Flush() {
+      this.position.Set(0, 0);
+      this.velocity.Set(0, 0);
+    }
+  }, {
+    key: "Update",
+    value: function Update() {}
+  }]);
+
+  return PlayerSegment;
+}(CollisionObject_1.CollisionObject);
+
+exports.PlayerSegment = PlayerSegment;
+},{"../ObjectBaseClasses/CollisionObject":"ts/ObjectBaseClasses/CollisionObject.ts","./Player":"ts/Player/Player.ts"}],"ts/Pool/ObjectPool.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -533,78 +742,66 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var Vector = /*#__PURE__*/function () {
-  function Vector(xValue, yValue) {
-    var zValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+var PlayerSegment_1 = require("../Player/PlayerSegment");
 
-    _classCallCheck(this, Vector);
+exports.Player = PlayerSegment_1.Player;
 
-    this.y = 0;
-    this.z = 0;
-    this.x = xValue;
-    this.y = yValue;
-    this.z = zValue;
+var ObjectPool = /*#__PURE__*/function () {
+  function ObjectPool() {
+    _classCallCheck(this, ObjectPool);
   }
 
-  _createClass(Vector, [{
-    key: "Set",
-    value: function Set(X, Y) {
-      var Z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      this.x = X;
-      this.y = Y;
-      this.z = Z;
+  _createClass(ObjectPool, null, [{
+    key: "Add",
+    value: function Add(parent, aSize) {
+      for (var i = 0; i < aSize; i++) {
+        this.available.push(new PlayerSegment_1.PlayerSegment(new PlayerSegment_1.Vector(0, 0), parent));
+      }
     }
   }, {
-    key: "X",
-    get: function get() {
-      return this.x;
-    },
-    set: function set(value) {
-      this.x = value;
+    key: "GetObject",
+    value: function GetObject(parent) {
+      var poolObj;
+
+      if (this.available.length > 0) {
+        poolObj = this.available[0];
+        this.inUse.push(poolObj);
+        this.available.shift();
+      } else {
+        poolObj = new PlayerSegment_1.PlayerSegment(parent.Movement.Velocity, parent);
+        this.inUse.push(poolObj);
+      }
+
+      return poolObj;
     }
   }, {
-    key: "Y",
-    get: function get() {
-      return this.y;
-    },
-    set: function set(value) {
-      this.y = value;
+    key: "ReleaseObject",
+    value: function ReleaseObject(anObject) {
+      var index;
+      this.CleanUp(anObject);
+      this.available.push(anObject);
+      index = this.inUse.indexOf(anObject);
+
+      if (index != null) {
+        this.inUse.splice(index, 1);
+      }
     }
   }, {
-    key: "Z",
-    get: function get() {
-      return this.z;
-    },
-    set: function set(value) {
-      this.z = value;
+    key: "CleanUp",
+    value: function CleanUp(anObject) {
+      if (anObject instanceof PlayerSegment_1.PlayerSegment) {
+        anObject.Flush();
+      }
     }
   }]);
 
-  return Vector;
+  return ObjectPool;
 }();
 
-exports.Vector = Vector;
-},{}],"ts/ObjectBaseClasses/GameObject.ts":[function(require,module,exports) {
-"use strict";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var Vector_1 = require("../VariableLists/Vector");
-
-exports.Vector = Vector_1.Vector;
-
-var GameObject = function GameObject(aPosition) {
-  _classCallCheck(this, GameObject);
-
-  this.position = aPosition;
-};
-
-exports.GameObject = GameObject;
-},{"../VariableLists/Vector":"ts/VariableLists/Vector.ts"}],"ts/Player/PlayerMovement.ts":[function(require,module,exports) {
+ObjectPool.available = [];
+ObjectPool.inUse = [];
+exports.ObjectPool = ObjectPool;
+},{"../Player/PlayerSegment":"ts/Player/PlayerSegment.ts"}],"ts/Player/PlayerMovement.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -685,9 +882,11 @@ var StateMachine_1 = require("../GameStates/StateMachine");
 
 var Controls_1 = require("../ObserverCheck/Controls");
 
-var Player_1 = require("../Player/Player");
+var ObjectPool_1 = require("../Pool/ObjectPool");
 
 var PlayerMovement_1 = require("../Player/PlayerMovement");
+
+var POOL_SIZE = 20;
 
 var Game = /*#__PURE__*/function () {
   function Game() {
@@ -696,8 +895,9 @@ var Game = /*#__PURE__*/function () {
     this.stateMachine = StateMachine_1.StateMachine.GetInstance();
     this.controls = Controls_1.Controls.GetInstance();
     this.playerMovement = new PlayerMovement_1.PlayerMovement(new PlayerMovement_1.Vector(40, 80), this.controls);
-    this.player = new Player_1.Player(this.playerMovement);
+    this.player = new ObjectPool_1.Player(this.playerMovement);
     console.log(this.player.Movement);
+    ObjectPool_1.ObjectPool.Add(this.player, POOL_SIZE);
     this.stateMachine.CurrentState.LoadGame();
   }
 
@@ -721,7 +921,7 @@ var Game = /*#__PURE__*/function () {
 }();
 
 exports.Game = Game;
-},{"../GameStates/StateMachine":"ts/GameStates/StateMachine.ts","../ObserverCheck/Controls":"ts/ObserverCheck/Controls.ts","../Player/Player":"ts/Player/Player.ts","../Player/PlayerMovement":"ts/Player/PlayerMovement.ts"}],"app.ts":[function(require,module,exports) {
+},{"../GameStates/StateMachine":"ts/GameStates/StateMachine.ts","../ObserverCheck/Controls":"ts/ObserverCheck/Controls.ts","../Pool/ObjectPool":"ts/Pool/ObjectPool.ts","../Player/PlayerMovement":"ts/Player/PlayerMovement.ts"}],"app.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -760,7 +960,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49387" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51950" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

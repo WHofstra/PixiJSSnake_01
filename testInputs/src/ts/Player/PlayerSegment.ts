@@ -1,5 +1,6 @@
 import { CollisionObject, Vector } from "../ObjectBaseClasses/CollisionObject";
 import { Player } from "./Player";
+export { Player, Vector }
 
 export class PlayerSegment extends CollisionObject implements Observer, PooledObject
 {
@@ -11,6 +12,12 @@ export class PlayerSegment extends CollisionObject implements Observer, PooledOb
 
         parent.Register(this);
         this.velocity = parent.Movement.Velocity;
+    }
+
+    Flush(): void
+    {
+        this.position.Set(0, 0);
+        this.velocity.Set(0, 0);
     }
 
     Update(): void

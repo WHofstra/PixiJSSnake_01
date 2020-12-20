@@ -1,8 +1,8 @@
 export class Vector
 {
     private x: number;
-    private y: number = 0;
-    private z: number = 0;
+    private y: number;
+    private z: number;
 
     constructor(xValue: number, yValue: number, zValue: number = 0)
     {
