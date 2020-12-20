@@ -159,6 +159,15 @@ var MenuState = /*#__PURE__*/function () {
       console.log("This is the highscore.");
       this.machine.CurrentState = this.machine.State[3];
     }
+  }], [{
+    key: "GetInstance",
+    value: function GetInstance(aMachine) {
+      if (!this.menu) {
+        this.menu = new MenuState(aMachine);
+      }
+
+      return this.menu;
+    }
   }]);
 
   return MenuState;
@@ -206,6 +215,15 @@ var InGameState = /*#__PURE__*/function () {
     key: "ShowHighScores",
     value: function ShowHighScores() {
       console.log("You cannot watch the highscore just yet.");
+    }
+  }], [{
+    key: "GetInstance",
+    value: function GetInstance(aMachine) {
+      if (!this.inGame) {
+        this.inGame = new InGameState(aMachine);
+      }
+
+      return this.inGame;
     }
   }]);
 
@@ -256,6 +274,15 @@ var GameOverState = /*#__PURE__*/function () {
       console.log("Going to the highscore.");
       this.machine.CurrentState = this.machine.State[3];
     }
+  }], [{
+    key: "GetInstance",
+    value: function GetInstance(aMachine) {
+      if (!this.gameOver) {
+        this.gameOver = new GameOverState(aMachine);
+      }
+
+      return this.gameOver;
+    }
   }]);
 
   return GameOverState;
@@ -304,6 +331,15 @@ var HighscoreState = /*#__PURE__*/function () {
     value: function ShowHighScores() {
       console.log("You are currently viewing the highscore.");
     }
+  }], [{
+    key: "GetInstance",
+    value: function GetInstance(aMachine) {
+      if (!this.highscore) {
+        this.highscore = new HighscoreState(aMachine);
+      }
+
+      return this.highscore;
+    }
   }]);
 
   return HighscoreState;
@@ -336,10 +372,10 @@ var StateMachine = /*#__PURE__*/function () {
     _classCallCheck(this, StateMachine);
 
     this.state = [];
-    this.state.push(new MenuState_1.MenuState(this));
-    this.state.push(new InGameState_1.InGameState(this));
-    this.state.push(new GameOverState_1.GameOverState(this));
-    this.state.push(new HighscoreState_1.HighscoreState(this));
+    this.state.push(MenuState_1.MenuState.GetInstance(this));
+    this.state.push(InGameState_1.InGameState.GetInstance(this));
+    this.state.push(GameOverState_1.GameOverState.GetInstance(this));
+    this.state.push(HighscoreState_1.HighscoreState.GetInstance(this));
     this.currentState = this.state[0];
   }
 
@@ -355,6 +391,15 @@ var StateMachine = /*#__PURE__*/function () {
     key: "State",
     get: function get() {
       return this.state;
+    }
+  }], [{
+    key: "GetInstance",
+    value: function GetInstance() {
+      if (!this.stateMachine) {
+        this.stateMachine = new StateMachine();
+      }
+
+      return this.stateMachine;
     }
   }]);
 
@@ -409,12 +454,72 @@ var Controls = /*#__PURE__*/function () {
       console.log(this.input + " is pressed.");
       this.Notify();
     }
+  }], [{
+    key: "GetInstance",
+    value: function GetInstance() {
+      if (!this.controls) {
+        this.controls = new Controls();
+      }
+
+      return this.controls;
+    }
   }]);
 
   return Controls;
 }();
 
 exports.Controls = Controls;
+},{}],"ts/Player/Player.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Player = /*#__PURE__*/function () {
+  function Player(movement) {
+    _classCallCheck(this, Player);
+
+    this.children = [];
+    this.movement = movement;
+  }
+
+  _createClass(Player, [{
+    key: "Register",
+    value: function Register(aChild) {
+      this.children.push(aChild);
+    }
+  }, {
+    key: "Unregister",
+    value: function Unregister(aChild) {
+      var index;
+      index = this.children.indexOf(aChild);
+      this.children.splice(index, 1);
+    }
+  }, {
+    key: "Notify",
+    value: function Notify() {
+      this.children.forEach(function (element) {
+        element.Update();
+      });
+    }
+  }, {
+    key: "Movement",
+    get: function get() {
+      return this.movement;
+    }
+  }]);
+
+  return Player;
+}();
+
+exports.Player = Player;
 },{}],"ts/VariableLists/Vector.ts":[function(require,module,exports) {
 "use strict";
 
@@ -442,6 +547,14 @@ var Vector = /*#__PURE__*/function () {
   }
 
   _createClass(Vector, [{
+    key: "Set",
+    value: function Set(X, Y) {
+      var Z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      this.x = X;
+      this.y = Y;
+      this.z = Z;
+    }
+  }, {
     key: "X",
     get: function get() {
       return this.x;
@@ -523,6 +636,7 @@ Object.defineProperty(exports, "__esModule", {
 var GameObject_1 = require("../ObjectBaseClasses/GameObject");
 
 exports.Vector = GameObject_1.Vector;
+var SPEED = 30.0;
 
 var PlayerMovement = /*#__PURE__*/function (_GameObject_1$GameObj) {
   _inherits(PlayerMovement, _GameObject_1$GameObj);
@@ -535,14 +649,18 @@ var PlayerMovement = /*#__PURE__*/function (_GameObject_1$GameObj) {
     _classCallCheck(this, PlayerMovement);
 
     _this = _super.call(this, aPosition);
+    _this.velocity = new GameObject_1.Vector(SPEED, 0);
     controls.Register(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(PlayerMovement, [{
     key: "Update",
-    value: function Update() {
-      console.log("Player moved to (" + this.position.X + ", " + this.position.Y + ", " + this.position.Z + ").");
+    value: function Update() {}
+  }, {
+    key: "Velocity",
+    get: function get() {
+      return this.velocity;
     }
   }]);
 
@@ -567,16 +685,19 @@ var StateMachine_1 = require("../GameStates/StateMachine");
 
 var Controls_1 = require("../ObserverCheck/Controls");
 
+var Player_1 = require("../Player/Player");
+
 var PlayerMovement_1 = require("../Player/PlayerMovement");
 
 var Game = /*#__PURE__*/function () {
   function Game() {
     _classCallCheck(this, Game);
 
-    this.stateMachine = new StateMachine_1.StateMachine();
-    this.controls = new Controls_1.Controls();
-    this.player = new PlayerMovement_1.PlayerMovement(new PlayerMovement_1.Vector(40, 80), this.controls);
-    this.player;
+    this.stateMachine = StateMachine_1.StateMachine.GetInstance();
+    this.controls = Controls_1.Controls.GetInstance();
+    this.playerMovement = new PlayerMovement_1.PlayerMovement(new PlayerMovement_1.Vector(40, 80), this.controls);
+    this.player = new Player_1.Player(this.playerMovement);
+    console.log(this.player.Movement);
     this.stateMachine.CurrentState.LoadGame();
   }
 
@@ -585,13 +706,22 @@ var Game = /*#__PURE__*/function () {
     value: function KeyInput(anInput) {
       this.controls.KeyInput(anInput);
     }
+  }], [{
+    key: "GetInstance",
+    value: function GetInstance() {
+      if (!this.game) {
+        this.game = new Game();
+      }
+
+      return this.game;
+    }
   }]);
 
   return Game;
 }();
 
 exports.Game = Game;
-},{"../GameStates/StateMachine":"ts/GameStates/StateMachine.ts","../ObserverCheck/Controls":"ts/ObserverCheck/Controls.ts","../Player/PlayerMovement":"ts/Player/PlayerMovement.ts"}],"app.ts":[function(require,module,exports) {
+},{"../GameStates/StateMachine":"ts/GameStates/StateMachine.ts","../ObserverCheck/Controls":"ts/ObserverCheck/Controls.ts","../Player/Player":"ts/Player/Player.ts","../Player/PlayerMovement":"ts/Player/PlayerMovement.ts"}],"app.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -600,7 +730,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var Game_1 = require("./ts/Scene/Game");
 
-var game = new Game_1.Game();
+var game = Game_1.Game.GetInstance();
 game.KeyInput("S");
 },{"./ts/Scene/Game":"ts/Scene/Game.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -630,7 +760,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51047" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49387" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

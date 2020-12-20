@@ -1,5 +1,6 @@
 import { StateMachine } from '../GameStates/StateMachine';
 import { Controls } from '../ObserverCheck/Controls';
+import { Player } from '../Player/Player';
 import { PlayerMovement, Vector } from '../Player/PlayerMovement';
 
 export class Game
@@ -9,7 +10,8 @@ export class Game
 
     private stateMachine: StateMachine;
     private controls: Controls;
-    private player: PlayerMovement;
+    private player: Player;
+    private playerMovement: PlayerMovement;
 
     private constructor()
     {
@@ -18,8 +20,11 @@ export class Game
         this.controls     = Controls.GetInstance();
 
         //Define Controls Observers
-        this.player = new PlayerMovement(new Vector(40, 80), this.controls);
-        this.player; //The Variable is Not Read in This Class Yet
+        this.playerMovement = new PlayerMovement(new Vector(40, 80), this.controls);
+
+        //Define Player-object
+        this.player = new Player(this.playerMovement);
+        console.log(this.player.Movement);
 
         //Perform State Changes
         this.stateMachine.CurrentState.LoadGame();

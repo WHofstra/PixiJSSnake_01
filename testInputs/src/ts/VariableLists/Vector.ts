@@ -34,4 +34,11 @@ export class Vector
     public set Z(value: number) {
         this.z = value;
     }
+
+    Set(X: number, Y: number, Z: number = 0): void
+    {
+        this.x = X;
+        this.y = Y;
+        this.z = Z;
+    }
 }

@@ -3,7 +3,7 @@ export { Vector };
 
 export class GameObject
 {
-	protected position;
+    protected position;
 
     constructor(aPosition: Vector)
     {
