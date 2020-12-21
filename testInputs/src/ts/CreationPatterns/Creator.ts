@@ -1,0 +1,4 @@
+interface Creator
+{
+    CreateObject(): Product;
+}

@@ -1,4 +1,7 @@
-export class Item
+export class Item implements Product
 {
-
+    Flush(): void
+    {
+        
+    }
 }

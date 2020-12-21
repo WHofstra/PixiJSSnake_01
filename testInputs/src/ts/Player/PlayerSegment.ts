@@ -2,7 +2,7 @@ import { CollisionObject, Vector } from "../ObjectBaseClasses/CollisionObject";
 import { Player } from "./Player";
 export { Player, Vector }
 
-export class PlayerSegment extends CollisionObject implements Observer, PooledObject
+export class PlayerSegment extends CollisionObject implements Product, Observer
 {
     protected velocity: Vector;
 

@@ -1,0 +1,4 @@
+interface Product
+{
+    Flush(): void;
+}

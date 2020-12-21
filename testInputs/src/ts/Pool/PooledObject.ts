@@ -1,4 +1,0 @@
-interface PooledObject
-{
-    Flush(): void;
-}

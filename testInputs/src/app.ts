@@ -1,5 +1,5 @@
 //import * as PIXI from 'pixi.js';
-import { Game } from "./ts/Scene/Game"
+import { Game } from "./ts/Scene/Game";
 
 //Creates a Renderer Using WebGL
 //const app = new PIXI.Application({ width: 512, height: 478, backgroundColor: 0x000000 });

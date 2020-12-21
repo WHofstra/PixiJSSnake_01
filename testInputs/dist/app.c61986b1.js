@@ -566,7 +566,71 @@ var GameObject = /*#__PURE__*/function () {
 }();
 
 exports.GameObject = GameObject;
-},{"../VariableLists/Vector":"ts/VariableLists/Vector.ts"}],"ts/ObjectBaseClasses/CollisionObject.ts":[function(require,module,exports) {
+},{"../VariableLists/Vector":"ts/VariableLists/Vector.ts"}],"ts/Player/PlayerMovement.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var GameObject_1 = require("../ObjectBaseClasses/GameObject");
+
+exports.Vector = GameObject_1.Vector;
+var SPEED = 30.0;
+
+var PlayerMovement = /*#__PURE__*/function (_GameObject_1$GameObj) {
+  _inherits(PlayerMovement, _GameObject_1$GameObj);
+
+  var _super = _createSuper(PlayerMovement);
+
+  function PlayerMovement(aPosition, controls) {
+    var _this;
+
+    _classCallCheck(this, PlayerMovement);
+
+    _this = _super.call(this, aPosition);
+    _this.velocity = new GameObject_1.Vector(SPEED, 0);
+    controls.Register(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(PlayerMovement, [{
+    key: "Update",
+    value: function Update() {}
+  }, {
+    key: "Velocity",
+    get: function get() {
+      return this.velocity;
+    }
+  }]);
+
+  return PlayerMovement;
+}(GameObject_1.GameObject);
+
+exports.PlayerMovement = PlayerMovement;
+},{"../ObjectBaseClasses/GameObject":"ts/ObjectBaseClasses/GameObject.ts"}],"ts/ObjectBaseClasses/CollisionObject.ts":[function(require,module,exports) {
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -729,7 +793,42 @@ var PlayerSegment = /*#__PURE__*/function (_CollisionObject_1$Co) {
 }(CollisionObject_1.CollisionObject);
 
 exports.PlayerSegment = PlayerSegment;
-},{"../ObjectBaseClasses/CollisionObject":"ts/ObjectBaseClasses/CollisionObject.ts","./Player":"ts/Player/Player.ts"}],"ts/Pool/ObjectPool.ts":[function(require,module,exports) {
+},{"../ObjectBaseClasses/CollisionObject":"ts/ObjectBaseClasses/CollisionObject.ts","./Player":"ts/Player/Player.ts"}],"ts/CreationPatterns/SegmentFactory.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var PlayerSegment_1 = require("../Player/PlayerSegment");
+
+exports.Player = PlayerSegment_1.Player;
+
+var SegmentFactory = /*#__PURE__*/function () {
+  function SegmentFactory(parent) {
+    _classCallCheck(this, SegmentFactory);
+
+    this.parent = parent;
+  }
+
+  _createClass(SegmentFactory, [{
+    key: "CreateObject",
+    value: function CreateObject() {
+      return new PlayerSegment_1.PlayerSegment(this.parent.Movement.Position, this.parent);
+    }
+  }]);
+
+  return SegmentFactory;
+}();
+
+exports.SegmentFactory = SegmentFactory;
+},{"../Player/PlayerSegment":"ts/Player/PlayerSegment.ts"}],"ts/Pool/ObjectPool.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -753,10 +852,8 @@ var ObjectPool = /*#__PURE__*/function () {
 
   _createClass(ObjectPool, null, [{
     key: "Add",
-    value: function Add(parent, aSize) {
-      for (var i = 0; i < aSize; i++) {
-        this.available.push(new PlayerSegment_1.PlayerSegment(new PlayerSegment_1.Vector(0, 0), parent));
-      }
+    value: function Add(anObject) {
+      this.available.push(anObject);
     }
   }, {
     key: "GetObject",
@@ -801,16 +898,39 @@ var ObjectPool = /*#__PURE__*/function () {
 ObjectPool.available = [];
 ObjectPool.inUse = [];
 exports.ObjectPool = ObjectPool;
-},{"../Player/PlayerSegment":"ts/Player/PlayerSegment.ts"}],"ts/Player/PlayerMovement.ts":[function(require,module,exports) {
+},{"../Player/PlayerSegment":"ts/Player/PlayerSegment.ts"}],"ts/Items/Item.ts":[function(require,module,exports) {
 "use strict";
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Item = /*#__PURE__*/function () {
+  function Item() {
+    _classCallCheck(this, Item);
+  }
+
+  _createClass(Item, [{
+    key: "Flush",
+    value: function Flush() {}
+  }]);
+
+  return Item;
+}();
+
+exports.Item = Item;
+},{}],"ts/Items/Edible.ts":[function(require,module,exports) {
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -830,42 +950,57 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var GameObject_1 = require("../ObjectBaseClasses/GameObject");
+var Item_1 = require("./Item");
 
-exports.Vector = GameObject_1.Vector;
-var SPEED = 30.0;
+var Edible = /*#__PURE__*/function (_Item_1$Item) {
+  _inherits(Edible, _Item_1$Item);
 
-var PlayerMovement = /*#__PURE__*/function (_GameObject_1$GameObj) {
-  _inherits(PlayerMovement, _GameObject_1$GameObj);
+  var _super = _createSuper(Edible);
 
-  var _super = _createSuper(PlayerMovement);
+  function Edible() {
+    _classCallCheck(this, Edible);
 
-  function PlayerMovement(aPosition, controls) {
-    var _this;
-
-    _classCallCheck(this, PlayerMovement);
-
-    _this = _super.call(this, aPosition);
-    _this.velocity = new GameObject_1.Vector(SPEED, 0);
-    controls.Register(_assertThisInitialized(_this));
-    return _this;
+    return _super.apply(this, arguments);
   }
 
-  _createClass(PlayerMovement, [{
-    key: "Update",
-    value: function Update() {}
-  }, {
-    key: "Velocity",
-    get: function get() {
-      return this.velocity;
+  return Edible;
+}(Item_1.Item);
+
+exports.Edible = Edible;
+},{"./Item":"ts/Items/Item.ts"}],"ts/CreationPatterns/EdibleFactory.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Edible_1 = require("../Items/Edible");
+
+exports.Edible = Edible_1.Edible;
+
+var EdibleFactory = /*#__PURE__*/function () {
+  function EdibleFactory() {
+    _classCallCheck(this, EdibleFactory);
+  }
+
+  _createClass(EdibleFactory, [{
+    key: "CreateObject",
+    value: function CreateObject() {
+      return new Edible_1.Edible();
     }
   }]);
 
-  return PlayerMovement;
-}(GameObject_1.GameObject);
+  return EdibleFactory;
+}();
 
-exports.PlayerMovement = PlayerMovement;
-},{"../ObjectBaseClasses/GameObject":"ts/ObjectBaseClasses/GameObject.ts"}],"ts/Scene/Game.ts":[function(require,module,exports) {
+exports.EdibleFactory = EdibleFactory;
+},{"../Items/Edible":"ts/Items/Edible.ts"}],"ts/Scene/Game.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -882,11 +1017,15 @@ var StateMachine_1 = require("../GameStates/StateMachine");
 
 var Controls_1 = require("../ObserverCheck/Controls");
 
-var ObjectPool_1 = require("../Pool/ObjectPool");
-
 var PlayerMovement_1 = require("../Player/PlayerMovement");
 
-var POOL_SIZE = 20;
+var SegmentFactory_1 = require("../CreationPatterns/SegmentFactory");
+
+var ObjectPool_1 = require("../Pool/ObjectPool");
+
+var EdibleFactory_1 = require("../CreationPatterns/EdibleFactory");
+
+var POOL_SIZE = 50;
 
 var Game = /*#__PURE__*/function () {
   function Game() {
@@ -895,13 +1034,24 @@ var Game = /*#__PURE__*/function () {
     this.stateMachine = StateMachine_1.StateMachine.GetInstance();
     this.controls = Controls_1.Controls.GetInstance();
     this.playerMovement = new PlayerMovement_1.PlayerMovement(new PlayerMovement_1.Vector(40, 80), this.controls);
-    this.player = new ObjectPool_1.Player(this.playerMovement);
+    this.player = new SegmentFactory_1.Player(this.playerMovement);
     console.log(this.player.Movement);
-    ObjectPool_1.ObjectPool.Add(this.player, POOL_SIZE);
+    this.playerFactory = new SegmentFactory_1.SegmentFactory(this.player);
+    this.FillPool(POOL_SIZE);
+    this.edibleFactory = new EdibleFactory_1.EdibleFactory();
+    this.item = this.edibleFactory.CreateObject();
+    console.log(this.item);
     this.stateMachine.CurrentState.LoadGame();
   }
 
   _createClass(Game, [{
+    key: "FillPool",
+    value: function FillPool(amount) {
+      for (var i = 0; i < amount; i++) {
+        ObjectPool_1.ObjectPool.Add(this.playerFactory.CreateObject());
+      }
+    }
+  }, {
     key: "KeyInput",
     value: function KeyInput(anInput) {
       this.controls.KeyInput(anInput);
@@ -921,7 +1071,7 @@ var Game = /*#__PURE__*/function () {
 }();
 
 exports.Game = Game;
-},{"../GameStates/StateMachine":"ts/GameStates/StateMachine.ts","../ObserverCheck/Controls":"ts/ObserverCheck/Controls.ts","../Pool/ObjectPool":"ts/Pool/ObjectPool.ts","../Player/PlayerMovement":"ts/Player/PlayerMovement.ts"}],"app.ts":[function(require,module,exports) {
+},{"../GameStates/StateMachine":"ts/GameStates/StateMachine.ts","../ObserverCheck/Controls":"ts/ObserverCheck/Controls.ts","../Player/PlayerMovement":"ts/Player/PlayerMovement.ts","../CreationPatterns/SegmentFactory":"ts/CreationPatterns/SegmentFactory.ts","../Pool/ObjectPool":"ts/Pool/ObjectPool.ts","../CreationPatterns/EdibleFactory":"ts/CreationPatterns/EdibleFactory.ts"}],"app.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -960,7 +1110,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

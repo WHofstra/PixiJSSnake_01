@@ -1,19 +1,17 @@
-import { PlayerSegment, Player, Vector } from "../Player/PlayerSegment";
+import { PlayerSegment, Player } from "../Player/PlayerSegment";
 export { Player };
 
 export class ObjectPool
 {
-    private static available: Array<PooledObject> = [];
-    private static inUse: Array<PooledObject> = [];
+    private static available: Array<Product> = [];
+    private static inUse: Array<Product> = [];
 
-    public static Add(parent: Player, aSize: number): void
+    public static Add(anObject: Product): void
     {
-        for (var i = 0; i < aSize; i++) {
-            this.available.push(new PlayerSegment(new Vector(0, 0), parent));
-        }
+        this.available.push(anObject);
     }
 
-    public static GetObject(parent: Player): PooledObject
+    public static GetObject(parent: Player): Product
     {
         let poolObj;
 
@@ -32,7 +30,7 @@ export class ObjectPool
         return poolObj;
     }
 
-    public static ReleaseObject(anObject: PooledObject): void
+    public static ReleaseObject(anObject: Product): void
     {
         let index: number;
 
@@ -45,7 +43,7 @@ export class ObjectPool
         }
     }
 
-    private static CleanUp(anObject: PooledObject): void
+    private static CleanUp(anObject: Product): void
     {
         if (anObject instanceof PlayerSegment) {
             anObject.Flush();
