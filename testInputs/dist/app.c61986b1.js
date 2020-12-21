@@ -117,7 +117,67 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"ts/GameStates/MenuState.ts":[function(require,module,exports) {
+})({"ts/Adapter/Adaptee.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Adaptee = /*#__PURE__*/function () {
+  function Adaptee() {
+    _classCallCheck(this, Adaptee);
+  }
+
+  _createClass(Adaptee, null, [{
+    key: "RequestQuestions",
+    value: function RequestQuestions() {
+      return "What exactly are you requesting again?";
+    }
+  }]);
+
+  return Adaptee;
+}();
+
+exports.Adaptee = Adaptee;
+},{}],"ts/Adapter/Adapter.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Adaptee_1 = require("./Adaptee");
+
+var Adapter = /*#__PURE__*/function () {
+  function Adapter() {
+    _classCallCheck(this, Adapter);
+  }
+
+  _createClass(Adapter, [{
+    key: "RequestConnection",
+    value: function RequestConnection() {
+      return Adaptee_1.Adaptee.RequestQuestions();
+    }
+  }]);
+
+  return Adapter;
+}();
+
+exports.Adapter = Adapter;
+},{"./Adaptee":"ts/Adapter/Adaptee.ts"}],"ts/GameStates/MenuState.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1078,11 +1138,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var Adapter_1 = require("./ts/Adapter/Adapter");
+
 var Game_1 = require("./ts/Scene/Game");
 
 var game = Game_1.Game.GetInstance();
+var req = new Adapter_1.Adapter();
 game.KeyInput("S");
-},{"./ts/Scene/Game":"ts/Scene/Game.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+console.log(req.RequestConnection());
+},{"./ts/Adapter/Adapter":"ts/Adapter/Adapter.ts","./ts/Scene/Game":"ts/Scene/Game.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1110,7 +1174,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52360" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52648" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

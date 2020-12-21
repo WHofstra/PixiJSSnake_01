@@ -3,7 +3,7 @@ import { Controls } from '../ObserverCheck/Controls';
 import { PlayerMovement, Vector } from '../Player/PlayerMovement';
 import { SegmentFactory, Player } from '../CreationPatterns/SegmentFactory';
 import { ObjectPool } from '../Pool/ObjectPool';
-import { EdibleFactory, Edible } from '../CreationPatterns/EdibleFactory';
+import { EdibleFactory } from '../CreationPatterns/EdibleFactory';
 
 const POOL_SIZE: number = 50;
 
@@ -20,7 +20,7 @@ export class Game
 
     private player: Player;
     private playerMovement: PlayerMovement;
-    private item: Edible;
+    private item: Product;
 
     private constructor()
     {
